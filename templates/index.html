@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div id="myDIV" class="form header">
+    <h2>My To Do List: Completed: {{ ctasks }}</h2>
+    
+        <form action="/create" method="post">
+            <input type="text" class="form-control" placeholder="Title..." name="task">
+            <input type="submit" class="addBtn form-control" value="Add">
+        </form>
+
+  </div>
+  
+  <ul id="myUL">
+    {% for task in tasks %}
+   
+        <li>
+            {% if task.complete %}
+               <i class="fa fa-check-square"></i> {{ task.name }}
+            {% else %}
+               <i class="fa fa-square"></i> {{ task.name }}
+               
+                    <a href="{{ url_for('complete_task', variable=task.id) }}" aria-hidden="true"><i class="check fa fa-check"></i></a>
+                
+            {% endif %}
+                <a href="{{ url_for('delete_task', variable=task.id) }}" aria-hidden="true"><i class="close fa  fa-trash"></i></a>
+            
+        </li>
+   
+    {% endfor %}
+    <!-- <li class="checked">Pay bills</li>
+    <li>Meet George</li>
+    <li>Buy eggs</li>
+    <li>Read a book</li>
+    <li>Organize office</li> -->
+  </ul>
+
+{% endblock %}
+
+
+
+
+
